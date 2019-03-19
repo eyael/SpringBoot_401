@@ -9,5 +9,13 @@ public class HomeController {
     public String index(){
         return "index";
     }
+    @RequestMapping("/login")
+    public String login(){
+        return "login";
+    }
+    @RequestMapping("/secure")
+    public String secure(){
+        return "secure";
+    }
 }
 
