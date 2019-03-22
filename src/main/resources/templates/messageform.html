@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Message Form</title>
+    <th:block th:insert="base :: header"></th:block>
+</head>
+<body>
+<nav th:replace="base :: nav"></nav>
+<div class="container">
+    <div class="my-5"></div>
+    <form action="#"
+          enctype="multipart/form-data"
+          method="post"
+          th:action="@{/process}" th:object="${message}">
+        <input th:field="*{id}" type="hidden"/>
+
+        <label>Title:</label><br>
+        <input th:field="*{title}" type="text"/>
+        <span th:errors="*{title}"
+              th:if="${#fields.hasErrors('title')}"></span><br/>
+
+        <label>Content:</label><br>
+        :<textarea rows="3" th:field="*{content}"/>
+        <span th:errors="*{content}"
+              th:if="${#fields.hasErrors('content')}"></span><br/>
+
+        <label>PostDate:</label><br>
+        :<input th:field="*{postedDate}" type="date"/>
+        <span th:errors="*{postedDate}"
+              th:if="${#fields.hasErrors('postedDate')}"></span><br/>
+
+        <label>PostedBy:</label><br>
+        <input th:field="*{postedBy}" type="text"/>
+        <span th:errors="*{postedBy}"
+              th:if="${#fields.hasErrors('postedBy')}"></span><br/>
+
+        <br/>
+        <input name="file" type="file"/>
+        <input type="submit" value="Post"/>
+
+    </form>
+</div>
+<span th:replace="base :: jslinks"></span>
+</body>
+</html>

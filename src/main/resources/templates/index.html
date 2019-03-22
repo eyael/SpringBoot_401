@@ -1,11 +1,55 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
+<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Message list</title>
+    <th:block th:insert="base :: header"></th:block>
 </head>
 <body>
-<h2>Insecure page</h2>
-<a href="/secure">Secure page</a>
+<nav th:replace="base :: nav"></nav>
+
+<div class="container">
+    <div class="my-5"></div>
+    <h2>Insecure Page</h2>
+    <a href="/add">Add a Message</a><br/>
+    <table class="table">
+
+        <tr>
+            <th>Title</th>
+            <th>PostedDate</th>
+            <th>PostedBy</th>
+            <td>Actions</td>
+        </tr>
+
+        <tr th:each="message: ${message}">
+
+            <td th:text="${message.title}"></td>
+            <td th:text="${message.postedDate}"></td>
+            <td th:text="${message.postedBy}"></td>
+            <td th:if="${message.headshot} != null">
+                <img style="width: 150px"; th:src="${message.headshot}" />
+            </td>
+            <td>
+                <a th:href="@{/update/{id}(id=${message.id})}">Update</a> -
+                <a th:href="@{/detail/{id}(id=${message.id})}">Detail</a> -
+                <a th:href="@{/delete/{id}(id=${message.id})}">Delete</a>
+            </td>
+        </tr>
+    </table>
+</div>
+</div>
+<div class="emptySpace"></div>
+</div>
+
+</div> <!--- End container -->
+
+<div sec:authorize="hasAuthority('ADMIN')">
+    Administrators will see this text. You can display a navbar here.
+</div>
+
+<div sec:authorize="hasAuthority('USER')">
+    Users will see this text. You can display a navbar here.
+</div>
+<span th:replace="base :: jslinks" ></span>
 </body>
 </html>

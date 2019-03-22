@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <th:block th:insert="base :: header"></th:block>
 </head>
 <body>
+<nav th:replace="base :: nav"></nav>
 <h1>Login page</h1>
 <div th:if="${param.error}">
     Invalid username or password
@@ -19,5 +21,6 @@
     </label></div>
     <div><input type="submit" value="Sign in"/></div>
 </form>
+<span th:replace="base :: jslinks" ></span>
 </body>
 </html>

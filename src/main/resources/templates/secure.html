@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
+<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -11,5 +11,12 @@
 <p th:text="${myuser.email}"></p><br/>
 <h4>last name</h4>
 <p th:text="${myuser.lastName}"></p>
+<div sec:authorize="hasAuthority('ADMIN')">
+    Administrators will see this text. You can display a navbar here.
+</div>
+
+<div sec:authorize="hasAuthority('USER')">
+    Users will see this text. You can display a navbar here.
+</div>
 </body>
 </html>
